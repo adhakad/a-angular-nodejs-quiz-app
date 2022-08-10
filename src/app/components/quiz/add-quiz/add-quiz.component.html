@@ -1,0 +1,176 @@
+
+<div class="container" *ngIf="showModal">
+    <div class="row">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Quiz</h5>
+            </div>
+            <form [formGroup]="quizForm" (ngSubmit)="quizSubmit()">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Enter Quiz Id</label>
+                        <input type="number" class="form-control" formControlName="quizId">
+                        <small *ngIf="!quizForm.get('quizId').valid && quizForm.get('quizId').touched"
+                            class="form-text text-danger">Please Enter Quiz Id.</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Enter Class Name</label>
+                        <input type="number" class="form-control" formControlName="className">
+                        <small *ngIf="!quizForm.get('className').valid && quizForm.get('className').touched"
+                            class="form-text text-danger">Please Enter Class Name.</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Enter Subject Name</label>
+                        <input type="text" class="form-control" formControlName="subjectName">
+                        <small *ngIf="!quizForm.get('subjectName').valid && quizForm.get('subjectName').touched"
+                            class="form-text text-danger">Please Enter Subject Name.</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Enter Quiz Title</label>
+                        <input type="text" class="form-control" formControlName="quizTitle">
+                        <small *ngIf="!quizForm.get('quizTitle').valid && quizForm.get('quizTitle').touched"
+                            class="form-text text-danger">Please Enter Quiz Title.</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Enter Total Question</label>
+                        <input type="number" class="form-control" formControlName="totalQuestion">
+                        <small *ngIf="!quizForm.get('totalQuestion').valid && quizForm.get('totalQuestion').touched"
+                            class="form-text text-danger">Please Enter Total Question.</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Enter Quiz Time Duration</label>
+                        <input type="number" class="form-control" formControlName="timeDuration">
+                        <small *ngIf="!quizForm.get('timeDuration').valid && quizForm.get('timeDuration').touched"
+                            class="form-text text-danger">Please Enter Class Name.</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Enter Quiz Status</label>
+                        <input type="text" class="form-control" formControlName="quizStatus">
+                        <small *ngIf="!quizForm.get('quizStatus').valid && quizForm.get('quizStatus').touched"
+                            class="form-text text-danger">Please Enter Quiz Status.</small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Add Quiz</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+<div *ngIf="!showModal">
+    <div class="modal-header">
+        <h5 class="modal-title">Add Question</h5>
+    </div>
+    <form [formGroup]="questionForm" (ngSubmit)="questionSubmit()">
+        <hr>
+        <div formGroupName="type">
+            <div formArrayName="option">
+                <div *ngFor="let que of allQuestion; let i = index">
+                    <div [formGroupName]="i">
+                        <h3>{{i+1}}</h3><br>
+                        <label>question {{i+1}}</label>
+                        <input type="text" formControlName="questionText" /><br>
+                        <label>option 1</label>
+                        <input type="text" formControlName="option1" /><br>
+                        <label>option 2</label>
+                        <input type="text" formControlName="option2" /><br>
+                        <label>option 3</label>
+                        <input type="text" formControlName="option3" /><br>
+                        <label>option 4</label>
+                        <input type="text" formControlName="option4" /><br>
+                        <label>andId</label>
+                        <input type="number" formControlName="ansId" /><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="container" *ngIf="!showModal">
+    <div class="row">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Question</h5>
+            </div>
+            <form [formGroup]="questionForm" (ngSubmit)="questionSubmit()">
+                <div class="modal-body" *ngFor="let totalQue of allQuestion; index as i">
+                    <h1>{{i + 1}}</h1>
+                    <div class="form-group">
+                        <label>Enter Quiz Id</label>
+                        <input type="number" class="form-control" formControlName="quizId">
+                        <small *ngIf="!questionForm.get('quizId').valid && questionForm.get('quizId').touched"
+                            class="form-text text-danger">Please Enter Quiz Id.</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Enter Question Id</label>
+                        <input type="number" class="form-control" formControlName="questionId">
+                        <small *ngIf="!questionForm.get('questionId').valid && questionForm.get('questionId').touched"
+                            class="form-text text-danger">Please Enter Question Id.</small>
+                    </div> 
+                    <div class="form-group">
+                        <label>Enter Question</label>
+                        <input type="text" class="form-control" formControlName="questionText">
+                        <small *ngIf="!questionForm.get('questionText').valid && questionForm.get('questionText').touched"
+                            class="form-text text-danger">Please Enter Question.</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Enter Option 1</label>
+                        <input type="text" class="form-control" formControlName="option1">
+                        <small *ngIf="!questionForm.get('option1').valid && questionForm.get('option1').touched"
+                            class="form-text text-danger">Please Enter Option 1.</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Enter Enter Option 2</label>
+                        <input type="text" class="form-control" formControlName="option2">
+                        <small *ngIf="!questionForm.get('option2').valid && questionForm.get('option2').touched"
+                            class="form-text text-danger">Please Enter Enter Option 2.</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Enter Enter Option 3</label>
+                        <input type="text" class="form-control" formControlName="option3">
+                        <small *ngIf="!questionForm.get('option3').valid && questionForm.get('option3').touched"
+                            class="form-text text-danger">Please Enter Enter Option 3.</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Enter Enter Option 4</label>
+                        <input type="text" class="form-control" formControlName="option4">
+                        <small *ngIf="!questionForm.get('option4').valid && questionForm.get('option4').touched"
+                            class="form-text text-danger">Please Enter Enter Option 4.</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Enter Ans Id</label>
+                        <input type="number" class="form-control" formControlName="ansId">
+                        <small *ngIf="!questionForm.get('ansId').valid && questionForm.get('ansId').touched"
+                            class="form-text text-danger">Please Enter Ans Id.</small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Add Question</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> -->

@@ -1,0 +1,90 @@
+<div class="container mt-5">
+    <div class="card">
+        <div class="d-flex justify-content-between p-3">
+            <div class="quiz-header">
+                <h4 style="font-family: cursive;color:#9a60ff">Zoclass Quiz</h4>
+            </div>
+        </div>
+        
+        <ng-container *ngIf="!isQuizCompleted">
+            <div class="d-flex justify-content-around py-3">
+                <div class="score">
+                </div>
+                <div class="question-remain">
+                    <span style="font-style: italic;">Question {{currentQuestion+1}} of {{questionList.length}}</span>
+                </div>
+                <div class="timer">
+                    <h5>{{getFormattedTime()}} ⏱</h5>
+                </div>
+            </div>
+            <ngx-skeleton-loader *ngIf="loader" count="1" appearance="line" animation="progress" [theme]="{'background-color': '#eeeef5',height: '75px','border-radius': 0}"></ngx-skeleton-loader>
+            <div class="question" *ngIf="!loader">
+                <div class="card">
+                    <h3>{{questionList[currentQuestion]?.questionText}}</h3>
+                </div>
+            </div>
+            <ngx-skeleton-loader *ngIf="loader" count="1" appearance="line" animation="progress" [theme]="{'background-color': '#eeeef5',height: '30px','border-radius': 0}"></ngx-skeleton-loader>
+            <div class="options" *ngIf="!loader">
+                <ol>
+                    <li (click)="answer(currentQuestion+1,questionList[currentQuestion]?.option1)">
+                        <div class="card" [ngClass]="{'option-click' : 1==saveAnswerList[currentQuestion]?.selectAnswer}">
+                            {{questionList[currentQuestion]?.option1}}
+                        </div>
+                    </li>
+                </ol>
+            </div>
+            <ngx-skeleton-loader *ngIf="loader" count="1" appearance="line" animation="progress" [theme]="{'background-color': '#eeeef5',height: '30px','border-radius': 0}"></ngx-skeleton-loader>
+            <div class="options" *ngIf="!loader">
+                <ol>
+                    <li (click)="answer(currentQuestion+1,questionList[currentQuestion]?.option2)">
+                        <div class="card" [ngClass]="{'option-click' : 2==saveAnswerList[currentQuestion]?.selectAnswer}">
+                               {{questionList[currentQuestion]?.option2}}
+                        </div>
+                    </li>
+                </ol>
+            </div>
+            <ngx-skeleton-loader *ngIf="loader" count="1" appearance="line" animation="progress" [theme]="{'background-color': '#eeeef5',height: '30px','border-radius': 0}"></ngx-skeleton-loader>
+            <div class="options" *ngIf="!loader">
+                <ol>
+                    <li (click)="answer(currentQuestion+1,questionList[currentQuestion]?.option3)">
+                        <div class="card" [ngClass]="{'option-click' : 3==saveAnswerList[currentQuestion]?.selectAnswer}">
+                             {{questionList[currentQuestion]?.option3}}
+                        </div>
+                    </li>
+                </ol>
+            </div>
+            <ngx-skeleton-loader *ngIf="loader" count="1" appearance="line" animation="progress" [theme]="{'background-color': '#eeeef5',height: '30px','border-radius': 0}"></ngx-skeleton-loader>
+            <div class="options" *ngIf="!loader">
+                <ol>
+                    <li (click)="answer(currentQuestion+1,questionList[currentQuestion]?.option4)">
+                        <div class="card" [ngClass]="{'option-click' : 4==saveAnswerList[currentQuestion]?.selectAnswer}">
+                             {{questionList[currentQuestion]?.option4}}
+                        </div>
+                    </li>
+                </ol>
+            </div>
+            
+            
+            <div class="d-flex justify-content-between">
+                <button [disabled]="currentQuestion===0" class="btn" (click)="previousQuestion()" style="background-color: #9a60ff!important;color: #fff!important;">Privious</button>
+                <button [disabled]="!btnEnabled" class="btn" (click)="submitQuiz()" style="background-color: #9a60ff!important;color: #fff!important;">&nbsp;&nbsp;Submit&nbsp;&nbsp;</button>
+                <button [disabled]="currentQuestion===nextDisabled" class="btn" (click)="nextQuestion()" style="background-color: #9059ff!important;color: #fff!important;">&nbsp;&nbsp;&nbsp;Next&nbsp;&nbsp;&nbsp;</button>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="isQuizCompleted">
+            <div class="row d-flex justify-content-between">
+                <div class="result text-center col-md-6 col-sm-12">
+                    <h3>Congratulations!! <br>You have completed the quiz. <br>Below is your result:</h3>
+                    <p>Total Number Of Questions : {{questionList.length}} </p>
+                    <p>Total Attempted Question: {{isAttempted}} </p>
+                    <p>Total Correct Answered : {{correctAnswer}} </p>
+                    <p>Total Wrong Answered : {{inCorrectAnswer}} </p>
+                    <p>Your Score : {{correctAnswer}}  </p>
+                    
+                </div>
+            </div>
+        </ng-container>
+
+    </div>
+</div>
